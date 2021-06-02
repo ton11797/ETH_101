@@ -26,6 +26,13 @@ async function main() {
 
   await simpleStorage.deployed();
   console.log("simpleStorage deployed to:", simpleStorage.address);
+
+
+  const Coin = await hre.ethers.getContractFactory("Coin");
+  const coin = await Coin.deploy();
+
+  await coin.deployed();
+  console.log("Coin deployed to:", coin.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
