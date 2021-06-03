@@ -4,6 +4,8 @@
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
+const Web3 = require('web3');
+let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -33,6 +35,14 @@ async function main() {
 
   await coin.deployed();
   console.log("Coin deployed to:", coin.address);
+
+  const Ballot = await hre.ethers.getContractFactory("Ballot");
+  const ballot = await Ballot.deploy(["0x7465737400000000000000000000000000000000000000000000000000000000","0x4e69636b00000000000000000000000000000000000000000000000000000000"]);
+
+  await ballot.deployed();
+  console.log("Ballot deployed to:", ballot.address);
+
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
