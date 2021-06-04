@@ -57,8 +57,8 @@ describe("sample-test",async function() {
 });
 
 describe("Ballot",async function() {
-  let Token;
-  let hardhatToken;
+  let Ballot;
+  let ballot;
   let owner;
   let addr1;
   let addr2;
@@ -110,4 +110,33 @@ describe("Ballot",async function() {
     let result = await ballot.winnerName()
     expect(result).to.equal("0x7465737400000000000000000000000000000000000000000000000000000000")
   });
+
+});
+
+describe("SimpleAuction",async function() {
+  let SimpleAuction;
+  let simpleAuction;
+  let owner;
+  let addr1;
+  let addr2;
+  let addr3;
+  let addr4;
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+  beforeEach(async function () {
+    [owner, addr1, addr2, addr3, addr4] = await ethers.getSigners();
+
+    SimpleAuction = await hre.ethers.getContractFactory("SimpleAuction");
+    simpleAuction = await SimpleAuction.deploy(2,owner.address);
+    await simpleAuction.deployed();
+  });
+
+  it("action", async function() {
+    await simpleAuction.connect(addr1).bid({ from: addr1.address, value: 10 })
+    await simpleAuction.connect(addr2).bid({ from: addr2.address, value: 11 })
+    await simpleAuction.connect(addr1).withdraw()
+    await simpleAuction.auctionEnd()
+
+  });
+
 });

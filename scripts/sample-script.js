@@ -42,7 +42,12 @@ async function main() {
   await ballot.deployed();
   console.log("Ballot deployed to:", ballot.address);
 
+  
+  const SimpleAuction = await hre.ethers.getContractFactory("SimpleAuction");
+  const simpleAuction = await SimpleAuction.deploy();
 
+  await simpleAuction.deployed();
+  console.log("SimpleAuction deployed to:", simpleAuction.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
