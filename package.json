@@ -1,7 +1,8 @@
 {
   "scripts": {
     "console": "npx hardhat console --network localhost",
-    "deploy": "npx hardhat run scripts/sample-script.js --network localhost",
+    "deploy": "npx hardhat run scripts/fishCoin-script.js --network localhost",
+    "deploy_r": "npx hardhat run scripts/fishCoin-script.js --network rinkeby",
     "compile": "npx hardhat compile",
     "test": "npx hardhat test",
     "account": "npx hardhat accounts"
